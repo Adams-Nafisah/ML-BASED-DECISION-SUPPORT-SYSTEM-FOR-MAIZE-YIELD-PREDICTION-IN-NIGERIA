@@ -1,10 +1,15 @@
 🌽 ML-DSS for Maize Yield Prediction — Nigeria
+
 Machine Learning–Based Decision Support System
 
 Author: Nafisah Adams
+
 Institution: United States International University-Africa (USIU-Africa)
+
 Program: Data Science & Analytics
+
 Project: Undergraduate Research Project
+
 Semester: Spring 2026
 
 📘 Project Overview
@@ -15,15 +20,14 @@ The system applies multiple machine learning algorithms to model the relationshi
 
 The project demonstrates how data science techniques can support agricultural decision-making and yield forecasting.
 
-📁 Project Structure
 maize_dss/
 │
-├── 01_maize_yield_modeling.ipynb     # Model training & experimentation
-├── app.py                            # Streamlit decision support dashboard
-├── requirements.txt                  # Python dependencies
-├── README.md                         # Project documentation
+├── 01_maize_yield_modeling.ipynb     
+├── app.py                           
+├── requirements.txt                 
+├── README.md                        
 │
-└── models/                           # Saved trained models
+└── models/                           
     ├── stacked_ensemble.pkl
     ├── random_forest.pkl
     ├── xgboost.pkl
@@ -196,6 +200,8 @@ XGBoost
 SHAP
 Streamlit
 Jupyter Notebook
+
+
 🎓 Academic Context
 
 This project was developed as part of the Data Science & Analytics undergraduate program at USIU-Africa.
