@@ -39,7 +39,9 @@ maize_dss/
 The /models folder is automatically generated when the notebook finishes training the models.
 
 ⚙️ Setup Instructions
+
 1️⃣ Create a Virtual Environment
+
 python -m venv maize_env
 
 Activate the environment:
@@ -51,10 +53,15 @@ maize_env\Scripts\activate
 Mac/Linux
 
 source maize_env/bin/activate
+
 2️⃣ Install Project Dependencies
+
 pip install -r requirements.txt
+
 3️⃣ Open the Project in VS Code
+
 code .
+
 4️⃣ Select the Jupyter Kernel
 
 Open:
@@ -162,20 +169,28 @@ https://data.mendeley.com/datasets/dkv6b3xj99/1
 The dataset contains environmental and soil variables associated with maize production, including:
 
 Temperature
+
 Rainfall
-Humidity
+
 Wind speed
+
 Soil composition (clay, sand, silt)
+
 Crop yield per hectare
+
 🔬 Research Objectives
 
 The project addresses the following objectives:
 
 Analyse the influence of climatic and soil variables on maize yield.
+
 Evaluate machine learning models for crop yield prediction.
+
 Develop an optimized ensemble model for maize yield forecasting.
+
 Deploy a machine learning–based decision support system.
-🧠 Explainable AI
+
+Explainable AI
 
 To improve interpretability, the project uses SHAP (Shapley Additive Explanations).
 
@@ -183,22 +198,34 @@ SHAP analysis identifies which environmental variables contribute most to maize 
 
 This improves transparency and helps users understand how predictions are generated.
 
-🆘 Troubleshooting
+Troubleshooting
+
 Models Not Found
 
 Ensure the notebook has been run completely so that the /models folder is generated.
 
 SHAP Installation Error
+
 pip install shap --upgrade
+
 Streamlit Port Already in Use
+
 streamlit run app.py --server.port 8502
-📌 Technologies Used
+
+Technologies Used
+
 Python
+
 Pandas
+
 Scikit-learn
+
 XGBoost
+
 SHAP
+
 Streamlit
+
 Jupyter Notebook
 
 
