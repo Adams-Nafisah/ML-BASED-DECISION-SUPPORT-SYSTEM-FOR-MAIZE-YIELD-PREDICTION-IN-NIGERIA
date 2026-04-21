@@ -1,236 +1,164 @@
-🌽 ML-DSS for Maize Yield Prediction — Nigeria
+Maize Yield Prediction System with Explainable AI
+Project Summary
 
-Machine Learning–Based Decision Support System
+This project develops an end-to-end machine learning system for predicting maize yield using environmental and soil data. The pipeline includes data analysis, feature engineering, model training, and explainability using SHAP.
 
-Author: Nafisah Adams
+Initial models showed near-perfect accuracy but were found to rely on geographic identifiers, leading to overfitting. A refined scientific model was developed using only agronomically meaningful variables, resulting in more realistic performance (R² ≈ 0.84). The final system balances predictive accuracy with interpretability and real-world applicability.
 
-Institution: United States International University-Africa (USIU-Africa)
+A Streamlit application is included to provide an interactive interface where users can input environmental conditions and receive yield predictions, explanations, and actionable agricultural recommendations.
 
-Program: Data Science & Analytics
-
-Project: Undergraduate Research Project
-
-Semester: Spring 2026
-
-📘 Project Overview
-
-This project develops a Machine Learning–Based Decision Support System (ML-DSS) for predicting maize yield using environmental and soil variables.
-
-The system applies multiple machine learning algorithms to model the relationship between climatic conditions, soil characteristics, and maize productivity. The best-performing model is deployed through an interactive Streamlit dashboard, allowing users to generate maize yield forecasts based on environmental inputs.
-
-The project demonstrates how data science techniques can support agricultural decision-making and yield forecasting.
-
-maize_dss/
+project/
 │
-├── 01_maize_yield_modeling.ipynb     
-├── app.py                           
-├── requirements.txt                 
-├── README.md                        
+
+├── data/
+
+│   └── final-data-Before FS.csv
+
 │
-└── models/                           
-    ├── stacked_ensemble.pkl
-    ├── random_forest.pkl
-    ├── xgboost.pkl
-    ├── scaler.pkl
-    ├── label_encoder_state.pkl
-    ├── feature_cols.json
-    └── model_results.csv
 
-The /models folder is automatically generated when the notebook finishes training the models.
+├── models/
 
-⚙️ Setup Instructions
+│   ├── maize_yield_ensemble.pkl
 
-1️⃣ Create a Virtual Environment
+│   ├── scientific_rf.pkl
 
-python -m venv maize_env
+│   ├── scientific_xgb.pkl
 
-Activate the environment:
+│   ├── scientific_lgbm.pkl
 
-Windows
+│   ├── scaler.pkl
 
-maize_env\Scripts\activate
+│   └── scientific_features.json
+│
+├── notebooks/
 
-Mac/Linux
+│   └── main_analysis.ipynb
+│
+├── figures/
 
-source maize_env/bin/activate
+│   ├── eda_yield_distribution.png
 
-2️⃣ Install Project Dependencies
+│   ├── eda_scatter_updated.png
 
-pip install -r requirements.txt
+│   ├── shap_scientific_summary.png
 
-3️⃣ Open the Project in VS Code
+│   └── prediction_accuracy_analysis.png
 
-code .
+├── app/
+│   └── app.py
+│
+│
+└── README.md
 
-4️⃣ Select the Jupyter Kernel
+Setup Instructions
 
-Open:
+1. Create Environment
 
-01_maize_yield_modeling.ipynb
+python -m venv venv
 
-Then select:
+source venv/bin/activate   # Mac/Linux
 
-Python Environment → maize_env
-🚀 Running the Project
-Step 1 — Train the Models
+venv\Scripts\activate      # Windows
 
-Open the notebook:
+2. Install Dependencies
 
-01_maize_yield_modeling.ipynb
+pip install pandas numpy matplotlib seaborn scikit-learn xgboost lightgbm shap joblib streamlit
+3. Optional (for notebook usage)
 
-Run all cells sequentially.
+pip install jupyter
 
-Main notebook stages:
+How to Run the Project
+Step 1: Load Dataset
 
-| Stage                  | Description                            |
-| ---------------------- | -------------------------------------- |
-| Imports & Setup        | Load libraries and environment         |
-| Dataset Loading        | Import maize dataset                   |
-| Data Exploration       | Examine dataset structure              |
-| Feature Engineering    | Prepare climate and soil variables     |
-| Train/Test Split       | Prepare data for model training        |
-| Model Training         | Train multiple ML algorithms           |
-| Ensemble Model         | Train stacked ensemble model           |
-| Performance Evaluation | Compare models using R² and MAE        |
-| Explainability         | Generate SHAP feature importance plots |
-| Model Saving           | Export trained models to `/models/`    |
+Ensure the dataset file is placed in the data/ folder:
 
+data/final-data-Before FS.csv
 
-Expected runtime:
+Step 2: Run Notebook
 
-3–8 minutes depending on CPU performance
+Open and execute:
 
-Step 2 — Launch the Decision Support Dashboard
+notebooks/01_maize_yield_modeling.ipynb
+This will:
 
-Run the Streamlit application:
+Load and clean data
 
-streamlit run app.py
+Perform exploratory analysis
 
-The dashboard will open in your browser at:
+Engineer features
 
-http://localhost:8501
-📊 Machine Learning Models
+Train models
 
-The project compares several regression algorithms used in predictive modelling.
+Evaluate performance
 
-| Model                           | Type                       |
-| ------------------------------- | -------------------------- |
-| Linear Regression               | Baseline statistical model |
-| Ridge Regression                | Regularized linear model   |
-| Support Vector Regression (SVR) | Kernel-based regression    |
-| Random Forest                   | Bagging ensemble model     |
-| XGBoost                         | Gradient boosting model    |
-| **Stacked Ensemble**            | Combined ensemble model    |
+Generate visualizations
 
+Step 3: Load Saved Models (Optional)
+import joblib
 
-The stacked ensemble model combines multiple algorithms to improve prediction accuracy.
+model = joblib.load("models/maize_yield_ensemble.pkl")
 
-📈 Model Performance
+Run Streamlit App (Recommended Interface)
+streamlit run app/app.py
 
-Performance was evaluated using:
+Reproducing Results
 
-R² (Coefficient of Determination)
-MAE (Mean Absolute Error)
-The results show that ensemble models significantly outperform traditional regression models.
-| Model                | R²         | MAE       |
-| -------------------- | ---------- | --------- |
-| Linear Regression    | -936.55    | 1.132     |
-| Ridge Regression     | -1252.12   | 1.256     |
-| SVR                  | 0.7500     | 0.173     |
-| Random Forest        | 0.7764     | 0.148     |
-| XGBoost              | 0.8409     | 0.131     |
-| **Stacked Ensemble** | **0.8424** | **0.129** |
+To reproduce results exactly:
 
+Use the same dataset version provided
 
-🌐 Decision Support Dashboard
+Ensure random seeds are fixed (random_state=42 used throughout)
 
-The system is deployed using Streamlit, providing an interactive interface for maize yield prediction.
+Run cells in order from:
 
-Dashboard Features
-| Feature              | Description                                       |
-| -------------------- | ------------------------------------------------- |
-| Yield Prediction     | Predict maize yield based on environmental inputs |
-| Model Comparison     | Visual comparison of machine learning models      |
-| Feature Importance   | SHAP-based explanation of model predictions       |
-| Environmental Inputs | Users enter climate and soil variables            |
-| Prediction Output    | Estimated maize yield (MT/Ha)                     |
+Data loading
 
+Feature engineering
 
-The dashboard allows users without machine learning expertise to interact with the predictive system.
+Train-test split
 
-📊 Dataset
+Model training
 
-The dataset used in this project was obtained from the Mendeley Data Repository.
+Evaluation
 
-Dataset link:
+Key outputs that should match:
 
-https://data.mendeley.com/datasets/dkv6b3xj99/1
+Scientific ensemble R² ≈ 0.84
 
-The dataset contains environmental and soil variables associated with maize production, including:
+MAE ≈ 0.12–0.13 range
+SHAP top drivers: evaporation, temperature range, heat-water stress
 
-Temperature
+Key Features Used (Scientific Model)
 
-Rainfall
+Average temperature
 
-Wind speed
+Precipitation
 
-Soil composition (clay, sand, silt)
+Soil pH
 
-Crop yield per hectare
+Soil texture (clay, sand, silt)
 
-🔬 Research Objectives
+Evaporation index
 
-The project addresses the following objectives:
+Heat-water stress
 
-Analyse the influence of climatic and soil variables on maize yield.
+Rainfall wind ratio
 
-Evaluate machine learning models for crop yield prediction.
+Moisture stress index
 
-Develop an optimized ensemble model for maize yield forecasting.
+Model Explainability
 
-Deploy a machine learning–based decision support system.
+SHAP is used to interpret both:
 
-Explainable AI
+Global feature importance
+Local (farm-level) predictions
 
-To improve interpretability, the project uses SHAP (Shapley Additive Explanations).
+This ensures transparency in decision-making and aligns predictions with agronomic reasoning.
 
-SHAP analysis identifies which environmental variables contribute most to maize yield predictions.
+Notes
 
-This improves transparency and helps users understand how predictions are generated.
+Earlier high accuracy models were identified as overfitted due to leakage from geographic identifiers.
 
-Troubleshooting
+Final model prioritises generalisation and scientific validity over inflated accuracy.
 
-Models Not Found
-
-Ensure the notebook has been run completely so that the /models folder is generated.
-
-SHAP Installation Error
-
-pip install shap --upgrade
-
-Streamlit Port Already in Use
-
-streamlit run app.py --server.port 8502
-
-Technologies Used
-
-Python
-
-Pandas
-
-Scikit-learn
-
-XGBoost
-
-SHAP
-
-Streamlit
-
-Jupyter Notebook
-
-
-🎓 Academic Context
-
-This project was developed as part of the Data Science & Analytics undergraduate program at USIU-Africa.
-
-The study demonstrates how machine learning techniques can support agricultural analytics and crop yield forecasting.
+All models are saved in models/ for reproducibility and deployment.
